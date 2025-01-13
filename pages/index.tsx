@@ -20,11 +20,12 @@ import TabbedChartContainer from '../components/Tabbed-Chart-Container';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Papa from 'papaparse';
-import { Download, 
+import {
+  Download,
   Github,
   Linkedin,
   Phone
- } from 'lucide-react';
+} from 'lucide-react';
 import Link from 'next/link';
 
 
@@ -58,7 +59,7 @@ const Home: React.FC = () => {
     '2020 Census Tract',
   ];
   const handlePhoneClick = () => {
-    setShowPhoneNumber(!showPhoneNumber); 
+    setShowPhoneNumber(!showPhoneNumber);
   };
 
 
@@ -95,17 +96,17 @@ const Home: React.FC = () => {
     if (file) {
       try {
         const fileText = await file.text();
-        
+
         const { meta } = Papa.parse(fileText, { header: true });
         const fileHeaders = meta.fields || [];
-        
+
         const isValidStructure = expectedHeaders.every(header => fileHeaders.includes(header));
         if (!isValidStructure) {
           toast.error('Invalid file structure. Please check the CSV headers.');
           setIsFileUploaded(false);
           return;
         }
-  
+
         const parsedData = await parseCSVData(fileText);
         setData(parsedData);
         setFilteredData(parsedData);
@@ -120,8 +121,8 @@ const Home: React.FC = () => {
       }
     }
   };
-  
-  
+
+
 
   const handlePreloadData = async () => {
     try {
@@ -138,7 +139,7 @@ const Home: React.FC = () => {
       toast.error('Failed to preload data. Please check the server or file.');
     }
   };
-  
+
 
   const chartGroups = [
     {
@@ -194,49 +195,50 @@ const Home: React.FC = () => {
         >
           <AnimatePresence>
             {!isFileUploaded && (
-              <div className="h-[72vh] flex flex-col items-center justify-center ">
-              <motion.div
-                className="mb-8 text-center"
-                initial={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-              
-                <Button
-                  variant="contained"
-                  component="label"
-                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
+              <div className="h-[72vh] px-5 flex flex-col items-center justify-center ">
+                <motion.div
+                  className="mb-8 text-center"
+                  initial={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  Upload CSV File
-                  <input
-                    type="file"
-                    hidden
-                    accept=".csv"
-                    onChange={handleFileUpload}
-                  />
-                </Button>
-                <Button
-                  variant="contained"
-                  className="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600 ml-4"
-                  onClick={handlePreloadData}
-                >
-                  Preload Data
-                </Button>
-                <div className="mt-4 flex justify-center items-center space-x-2">
-                  <a
-                    href="/sample.csv"
-                    download="sample.csv"
-                    className="flex items-center space-x-1 group"
+
+                  <Button
+                    variant="contained"
+                    component="label"
+                    className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600"
                   >
-                    <Download
-                      className="w-6 h-6 text-blue-500 group-hover:text-purple-500 transition duration-300 transform group-hover:scale-110"
+                    Upload CSV File
+                    <input
+                      type="file"
+                      hidden
+                      accept=".csv"
+                      onChange={handleFileUpload}
                     />
-                    <span className="text-blue-500 group-hover:text-purple-500 transition duration-300">
-                      Download Sample File
-                    </span>
-                  </a>
-                </div>
-              </motion.div>
+                  </Button>
+                  <Button
+                    variant="contained"
+                    className="bg-gradient-to-r from-green-500 to-teal-500 hover:from-green-600 hover:to-teal-600"
+                    onClick={handlePreloadData}
+                    sx={{ ml: 3 }}
+                  >
+                    Preload Data
+                  </Button>
+                  <div className="mt-4 flex justify-center items-center space-x-2">
+                    <a
+                      href="/sample.csv"
+                      download="sample.csv"
+                      className="flex items-center space-x-1 group"
+                    >
+                      <Download
+                        className="w-6 h-6 text-blue-500 group-hover:text-purple-500 transition duration-300 transform group-hover:scale-110"
+                      />
+                      <span className="text-blue-500 group-hover:text-purple-500 transition duration-300">
+                        Download Sample File
+                      </span>
+                    </a>
+                  </div>
+                </motion.div>
               </div>
             )}
           </AnimatePresence>
@@ -272,39 +274,39 @@ const Home: React.FC = () => {
         </motion.div>
       </Container>
       <footer className="py-4 text-center">
-      <div className="flex justify-center items-center space-x-4">
+        <div className="flex justify-center items-center space-x-4">
 
-        <a
-          href="https://github.com/gitbhaveshsharma"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-600 hover:text-purple-500  transition duration-300"
-        >
-          <Github className="w-4 h-4" />
-        </a>
+          <a
+            href="https://github.com/gitbhaveshsharma"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 hover:text-purple-500  transition duration-300"
+          >
+            <Github className="w-4 h-4" />
+          </a>
 
 
-        <a
-          href="https://www.linkedin.com/in/bhavesh-sharma-b5b3a7222/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-gray-600 hover:text-purple-500 transition duration-300"
-        >
-          <Linkedin className="w-4 h-4" />
-        </a>
+          <a
+            href="https://www.linkedin.com/in/bhavesh-sharma-b5b3a7222/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 hover:text-purple-500 transition duration-300"
+          >
+            <Linkedin className="w-4 h-4" />
+          </a>
 
-        <a
-          onClick={handlePhoneClick} 
-          className="text-gray-600 hover:text-purple-500 transition duration-300 flex items-center space-x-1 cursor-pointer"
-        >
-          <Phone className="w-4 h-4" />
-          {showPhoneNumber && <span className="text-xs">+91 9650168435</span>}
-        </a>
-      </div>
-      <span className="text-gray-600 hover:text-purple-500 transition duration-300 text-xs">
-        Made by Bhavesh Sharma
-      </span>
-    </footer>
+          <a
+            onClick={handlePhoneClick}
+            className="text-gray-600 hover:text-purple-500 transition duration-300 flex items-center space-x-1 cursor-pointer"
+          >
+            <Phone className="w-4 h-4" />
+            {showPhoneNumber && <span className="text-xs">+91 9650168435</span>}
+          </a>
+        </div>
+        <span className="text-gray-600 hover:text-purple-500 transition duration-300 text-xs">
+          Made by Bhavesh Sharma
+        </span>
+      </footer>
     </div>
   );
 }

@@ -5,7 +5,12 @@ import { AppBar, Toolbar, Typography } from '@mui/material';
 
 export default function Header() {
   return (
-    <AppBar position="static" className="bg-gradient-to-r from-[#5b2c6f] to-[#6c3483]">
+    <AppBar
+      position="static"
+      sx={{
+        background: "linear-gradient(to right, #5b2c6f, #6c3483)",
+      }}
+    >
       <Toolbar>
         <motion.div
           initial={{ opacity: 0, y: -20 }}
